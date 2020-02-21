@@ -1,0 +1,62 @@
+DevOps Starter Guides
+Written by Geoff Arroyo
+
+Section 2.5: Learning how to manage MySQL tables via the command line 
+
+In this guide we'll cover some of the basics when it comes to interacting with MySQL tables on the command line. This text will likely and should
+likely be updated in the future as we all learn more about managing our MySQL tables through the command prompt.
+
+I'll assume in this guide that you've already setup a connection to either our MySQL demand or supply instance. 
+
+It doesn't matter if you're working out of the supply or demand cloud in this tutorial as the commands will work the same. 
+
+1. Setup a connection to out MySQL instance using either the demand or supply cloud
+
+You should see a 
+
+mysql> 
+
+prompt if you successfully logged in. 
+
+Switch to either the team22demand or team22supply database to view our tables using the command 
+
+use team22demand;
+
+OR 
+
+use team22supply;
+
+depending on the droplet you're logged into. 
+
+2. View all of our tables in the database by using the command
+
+show tables;
+
+3. View the column specs of a certain table in our supply or demand database by using the command
+
+describe tableName;
+
+4. Dump all of data inside of a MySQL table out onto the terminal using the command
+
+select * from tableName;
+
+For this section, I highly recommend not actually running these commands unless the DevOps team member told you to do so. These 
+commands listed below will affect data inside of our tables and could be hard to undo if a mistake was made.
+
+5. Create a new table in our database by using the syntax,
+
+create table users (userid int auto_increment, primary key(userid), ip int unique, username varchar(40));
+
+6. If you want to delete a specific row inside a table,
+
+delete from users where userid=5;
+
+7. If you want to alter the specifications of a column inside of table..
+
+Say you want to make the username of the users table mentioned earlier a unique column, 
+
+alter table users modify username varchar(40) unique;
+
+** Again, do not try to alter, delete, or create a new table unless the DevOps team member has instructed you to do so.  
+
+
