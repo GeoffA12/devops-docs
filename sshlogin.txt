@@ -1,0 +1,62 @@
+DevOps Starter Guide
+Written by Geoff Arroyo
+
+Section 1: General Information
+Logging into the server via ssh
+ 	
+Windows users
+If you’re on windows, I recommend using powershell to learn terminal commands. The windows powershell allows you to use Unix commands (or DOS commands) on the command prompt. Our digital ocean droplets are ubuntu 18.04 which runs a newer version of Unix, so you’ll be needing to learn Unix commands anyways. 
+To get to the powershell, you should hold down the windows button and then press r. Once the run window pops open, type in ‘powershell’ and then hit run. Your powershell should open inside your home directory. 
+
+1.Each of you should have received a slack message with a zip file containing our ssh public and private keys to our server. Download the zip file and extract it onto your local machine. 
+
+Optional but highly recommended
+2.Go to your home directory. With mac, you can use the shortcut
+
+cd ~
+
+If you’re using windows, your home directory is likely something like 
+
+\Users\Geoff
+
+Use the command 
+
+ls -a
+
+to check if you already have an existing .ssh directory. If you don’t, you’ll probably want to create a directory .ssh where you can easily access your ssh keys. 
+	
+sudo mkdir .ssh
+
+Now we can move our public and private keys into this folder. 
+
+Navigate to your downloads folder and find the ‘team22’ folder with our public and private keys inside of them. 
+You can move the files individually into the .ssh folder by using the mv command, 
+
+sudo mv team22-rsa /home/geoffarroyo/.ssh
+sudo mv team22-rsa.pub /home/geoffarroyo/.ssh
+
+Navigate to the .ssh folder and type in the ‘ls’ command to make sure our files were moved to the right directory. 
+
+3.The team22-rsa key is the private and should never leave your local machine. The team22-rsa.pub is the public key to our server and is already copied onto both our supply and demand servers. Therefore, we can open a TCP/IP session with our supply and demand server via ssh using the private rsa key in our .ssh folder. 
+
+To login to the demand server, enter this command 
+ssh -i team22-rsa team22@demand.team22.softwareengineeringii.com
+	
+To login to the supply server, enter this command
+ssh -i team22-rsa team22@supply.team22.softwareengineeringii.com
+
+If you get prompted with a message from ssh asking for user authentication to the server, make sure you type in ‘yes’ and press enter. 
+
+If your login was successful, you’ll see 
+Team22@demand-02
+or
+Team22@supply-02:
+on your command prompt.
+
+
+	
+	
+	
+	
+
+
