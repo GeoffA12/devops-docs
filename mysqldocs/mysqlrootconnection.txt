@@ -1,0 +1,48 @@
+DevOps Starter Guides
+Written by Geoff Arroyo
+
+Section 2: Logging into mysql as a root user
+
+For this guide, i'm assuming that you've already learned how to login to both our supply and demand servers. If you haven't already done this, go
+and read the loginssh.txt file in this repo. 
+
+This guide will be fairly short as we'll only cover the commands you'll need to open a connection to either the team22 supply or demand database. 
+
+Opening a connection a connection to our MySQL demand instance
+
+1. Login to our demand droplet
+
+2. Open the connection to MySQL using port 6022
+
+Run this command in your terminal,
+
+mysql -u root -p -s -h 127.0.0.1 --port 6022
+
+You should now be prompted for a password. The password for our root user is simply: 
+
+password
+
+After entering this in, you should be connected to our demand database. 
+
+3. Type in this command in the mysql shell to connect to our team22 demand database
+
+use team22demand;
+
+You now have access to query or update any of the tables in our demand database.
+
+Opening a connection to our MySQL supply instance
+
+4. Login to our supply droplet. 
+
+5. Repeat steps 2-3.
+
+Use the same command to setup a TCP connection with our MySQL instance on port 6022,
+
+mysql -u root -p -s -h 127.0.0.1 --port 6022
+
+Enter the same password as before.
+
+6. Type in this command to connect to our team22 supply database
+
+use team22supply;
+
