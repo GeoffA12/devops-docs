@@ -1,0 +1,64 @@
+DevOps Starter Guides
+Written by Geoff Arroyo
+
+Front-end testing: Moving from localhost to Nginx 
+
+Most likely, we're going to need to visually display our front-end webpages to get a feel for the CSS design and Javascript functionality.
+
+MAMP is a great tool which we can leverage in this course to host local static html pages on our computers, as well as to test javascript functionality 
+when communicating with back-end python files. I'll cover localhost tutorials in another guide. 
+
+The main focus of this guide will be how you should adjust your image paths and javascript window replace URLs after you're finished testing 
+your front-end files out on your computer. 
+
+Demand side
+
+The basic idea is that, 
+
+everywhere you see 
+
+'localhost' 
+
+inside your file, you should replace it with 
+
+'https://demand.team22.softwareengineeringii.com'
+
+Supply side
+
+Everywhere you see 
+
+'localhost'
+
+inside your local file, you should replace it with 
+
+'https://supply.team22.softwareengineeringii.com'
+
+Ok, well that's simple enough. What if I have an asset or image which I can use on my local machine, but I want to add onto the server? 
+
+1. Decide which repository the image should be in
+2. Each repository should have a folder named 'assets' or something similar. 
+3. Make a pull request to put new images inside this folder. 
+
+Now that we've gotten our images that we're using on our local machine uploaded, we need to configure our source path. 
+
+In this example, i'll be woprking out of the demand cloud.
+
+Your source path will always contain:
+
+'https://demand.team22.softwareengineeringii.com'.
+
+Now we need to specify the path to the image on bitbucket as it its put on our server. 
+
+Let's say that I put an image 'note.png' inside the demand-front-end repository, which was put inside an assets folder. 
+
+This would be the correct path:
+
+src = 'https://demand.team22.softwareengineeringii.com/demand-front-end/assets/note.png'
+
+As you can see, we will always
+
+1. Specify our domain name
+2. Specify the repository the asset is in
+3. Specify the folders inside the repository the asset is in
+4. Specify the asset
+
