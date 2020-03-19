@@ -1,0 +1,130 @@
+DevOps Starter Guides
+Written by: Geoff Arroyo
+
+What you should know about Nginx as Back-end
+
+Nginx is the web server we're using on both our supply and demand servers, and is one of the most popular web servers in the world. 
+Nginx processes client requests by dividing up configurations into server and location "blocks", which live in a hierarchial structure. Each time a client makes a request, 
+Nginx will decide which configuration block should be used to handle the request.  
+
+What do we need to know about Nginx as back-end? 
+
+Well, for starters, I think there are few things worth learning about.
+
+1. How Nginx routes API requests to your back-end handler
+2. How to know which port number you should be using based on the nginx sites-available configuration
+
+
+How Nginx routes API requests to your back-end handler. 
+
+We can utilize Nginx to route API endpoints from our front-end to our back-end. 
+
+Nginx will essentially act as a proxy between the client api request (Javascript) and the API reponse from the back-end hosted on our server (Python).
+
+Let's look at a real scenario where we want to pass some form data to be parsed and written into a database. 
+
+In this scenarion, i'll be utilizing code which would be on our demand server, but the supply server skeleton would look very similar. 
+
+As a back-end developer, you would've specified an API endpoint in your handler file,
+
+
+path = self.path
+
+if path.endsWith("/api/vehicleRequest"):
+	// Do something
+
+
+Thus, you would've told the front-end developer that this is the API endpoint URI they needed to include in their fetch commannd.
+
+
+const regisration = {
+	"email": newEmail,
+	"password": password,
+	"phoneNumber": phoneNumber
+}
+
+const options = {
+	method: "POST",
+	headers: {
+		'Content-Type' : 'application/json'
+	}
+	mode: 'no-cors',
+	body: JSON.stringify(regisration)
+}
+
+fetch("https://demand.team22.softwareengineeringii.com/api/vehicleRequest", options).then(function(response) {
+	.....
+)};
+
+
+Unfortunately, the HTTPS connection can't be forwarded straight from static html file to your back-end API doc listening on a port on our server.
+
+Therefore, we need to look at the nginx 'sites-available' where our server location blocks are stored to see how the HTTPS request (data) are passed
+to the back-end.
+
+Let's assume that your back-end handler is listening on port 4022, and that the file is hosted on the demand server that the HTML file is also served on.
+E.g., both the Javascript code above, the code from the python file, and this Nginx server location block are all hosted in the same cloud in this example.
+
+
+server {
+	listen 443[:443] ssl;
+	
+	server_name demand.team22.softwareengineeringii.com;
+	root /var/www/demand.team22.softwareengineeringii.com/html;
+	
+	location /api/vehicleRequest {
+		proxy_pass https://localhost:4022;
+	}
+}
+
+
+How we're utilizing Nginx here is setting up a proxy pass connection from our original HTTPS request, and routing this request to a port number hosted on our 
+demand server. The original HTTPS request from the client in their browser will be sent to Nginx, and then be passed to your back-end handler.
+
+As a reminder, we're using port 4022 in this scenario in your API request handler.
+
+def main():
+    # Define the port your server will run on:
+    # Using 4001 as an example! Yours may run on another port!
+    # Consult with Devops Coordinator to find out which port
+    # your server should be running on!
+    port = 4022
+    # Create an http server using the class and port you defined
+    httpServer = http.server.HTTPServer(('', port), SimpleHTTPRequestHandler)
+    print("Running on port", port)
+    # this next call is blocking! So consult with Devops Coordinator for
+    # instructions on how to run without blocking other commands frombeing
+    # executed in your terminal!
+    httpServer.serve_forever()
+
+if __name__ == "__main__":
+    main()
+
+
+Note that the port number matters. Let's say that instead of using the correct port number, we used a wrong port in the nginx location block.
+
+
+proxy_pass://localhost:4000;
+
+
+Now that the outgoing port in the nginx location block (4000) doesn't match up with the listening port number (4022) established in your api handler, a 
+TCP/IP session won't be established between this Nginx location block and the back-end python. In other terms, the data from the front-end will never be sent to the back-end.
+
+This is essentially how you can lock at the Nginx location block on the server to tell which port number you should be connected to in the case
+of networking issues between the front-end and back-end. Make sure that the URI on the location block:
+
+location /api/vehicleRequest
+
+matches the specified API endpoint in your handler. Also make sure that the port number defined in your back-end file matches the port number specified by your devops
+team member in the same location block.
+
+proxy_pass https://localhost:4022;
+
+As a reminder, you can find our current Nginx server location blocks by using this issuing this command (assuming that you're on the demanbd server).
+
+nano /etc/nginx/sites-available/demand.team22.softwareengineeringii.com
+
+
+
+
+

@@ -1,0 +1,69 @@
+DevOps Starter Guides
+Written by: Geoff Arroyo
+
+How to setup a bitbucket pipeline in your repository
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+First off, I highly recommend you watch this youtube video to get a quick introduction to what Continuous Integration is and why a lot 
+of companies are using this devops technique to compress the amount of bugs in their repositories and speed up the deployment process.
+
+https://www.youtube.com/watch?v=E0A-7Tv5yzs
+
+Bitbucket Pipelines are the way in which we'll be building our CI (Continuous Integration) environment in this course. Pipelines are a tool
+which upon each commit to your repository will:
+
+1. Start build execution
+2. Runs automated test scripts on a docker container
+3. Deploys to target environment
+
+Step 1, or setting up the build configuration is what we'll concern ourselves with for this tutorial. 
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+Before you get started, I would recommend reviewing the pilot CItest branch inside the demand-back-end repository which has an already
+configured build, atuomated test scripts, and a requirements file inside the build (.yml) file. 
+
+Here are the steps you should take to make sure your bitbucket pipeline environment is setup propoerly inside your repository. 
+
+1. Go to bitbucket and click on your repository
+
+**Optional but highly recommended
+
+2. Make a new branch in your repository titled something like "CItest". Use this branch for the rest of this tutorial
+
+3. On the left-aligned toolbar, you should see a "Pipelines" option. Click on this. 
+
+4. Scroll down and click on the Python symbol. This will allow us to create a python docker image that our pipeline will build on. 
+
+5. Click on 'commit file'
+
+6. Once the file has been committed check out some of the code in the .yaml file. Notice that inside the script block, 
+there is a 'pip install -r requirements.txt' command. Thus, we need to push a requirements.txt file to our branch.
+
+7. Open up the branch on your local machine and create a new file called requirements.txt.
+Head over to my pilot CItest branch inside demand-back-end. Copy and paste the requirements.txt from this branch into the local 
+requirements.txt file you created inside your own branch. 
+
+Whatever you do, DO NOT CHANGE THE REQUIREMENTS.TXT file inside the pilot CItest branch. You should only be copying and pasting this code
+
+8. Push the requirements.txt to your remote branch. 
+
+9. Head over to the commits menu inside your repository. Notice that when you pushed the .txt file to your branch, a build configured and run 
+based on the information inside the build (.yml) file. If the requirements file was correctly pushed, you should see a green check mark next to the commit on bitbucket
+
+-- There could be many issues why you don't see a green check mark next to the commit. I'll quickly cover how we troubleshoot CI build errors here. 
+
+9a. Open up the pipelines menu inside your branch. You should see a list of builds along with failure, success, or error symbols. The builds are 
+sorted from most recent to least recent, so you'll probably want to click on the top most build when debugging. 
+
+9b. Once you click on the build, you should see a stpe-by-step list of the pipeline actions duing your latest commit. You'll see a red command when the build failed
+or ran into an issue inside the terminal UI on bitbucket. Click on that red command to troubleshoot the problem.
+
+10. Now we can start adding some automated test scripts to our build to make sure any developers who push to this branch aren't breaking our build. 
+
+Checkout the 'bitbucketPipelineStarterPART2.txt' tutorial inside this repo for the next steps to setting up your pipeline. 
+Checkout the 'usingPostManToGenerateUnitTests.txt' tutorial inside the unit-tetst repo to get started writing sample unit tests for your build. 
+
+**Let your devops team member know if this guide needs to be updated if you find errors following the steps recommended in this guide.
+

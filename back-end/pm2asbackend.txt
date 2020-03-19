@@ -1,0 +1,59 @@
+DevOps Starter Guides
+Written by: Geoff Arroyo
+
+How to manipulate PM2 as a Back-end developer
+
+PM2 is a NodeJS process management tool which i've been using to run our python back-end files as background threads. 
+
+As a quick recap, a program running as a background thread in our case means that the application is constantly running and forked to the background
+so that we can interact with our terminal instead of seeing the line 
+
+Login.py is now listening on port 4022 
+
+after statring the program in our terminal and not being able to issue any commands unless hitting Ctrl+c.
+
+PM2 is an incredibly powerful tool that can manage these processes for us even though its primarily used to fork NodeJS application. 
+
+If you're interested in reading more about what i've researched, here are some links to scan:
+https://pm2.keymetrics.io/docs/usage/quick-start/
+https://stackoverflow.com/questions/32127834/how-to-run-a-python-script-like-pm2-for-nodejs
+
+What your devops team member will likely be doing is using PM2 to manage your back-end applications and run them as background threads. Thus,
+you should become familiar with issuing a few PM2 commands you might need when integration testing your code. 
+
+Important commands:
+
+1. pm2 list
+
+This command will list out all of the background applications currently running on the server. Use this command when you want to check the status of the current applications
+on the server
+
+2. pm2 start team22webserviceapi.py --interpreter=python3
+
+This command will tell PM2 to fork a NEW application team22webserviceapi.py NOT already existing inside the PM2 management service to the background. If there are no syntax errors 
+in the file and the interpreter was typed in properly, the application will now be in an 'active' state when you list out all of the PM2 apps on the server.
+
+3. pm2 stop team22webserviceapi
+
+PM2 attaches a process tag to each of the background threads its managing on the server. You can see the process tag by typing out PM2 and it should be in either the first or second 
+column. If you issue the stop command with the process tag, it will tell PM2 to stop running the application as a background thread. 
+
+4. pm2 restart team22webserviceapi 
+
+This command will tell PM2 to restart an applicationn given a process tag. 
+
+5. pm2 delete team22webserviceapi
+
+This command will tell PM2 to delete an application from its application manager list. Only issue this command after notfying your devops coordinator that you'll 
+be deleting a background process from the PM2 list. 
+
+These basic commands should get you started working around PM2.
+
+In most scenarios, if you're integration testing your back-end handlers, you'll likely need to stop a process already forked to the background in order to manually debug the file.
+When working with PM2, its best to consult with your devops coordinator prior to issuing any changes to the state of the management application list. 
+
+
+
+
+
+ 

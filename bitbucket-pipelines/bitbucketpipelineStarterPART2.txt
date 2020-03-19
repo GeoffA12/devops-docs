@@ -1,0 +1,75 @@
+DevOps Starter Guides
+Written by: Geoff Arroyo
+
+Adding automated test scripts to your bitbucket pipeline
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+This is part two of the bitbucketPipelineStart.txt guide posted in this repository. Make sure you read the first bitbucket pipeline tutorial first before proceeding with
+this one. 
+
+In this guide, we'll be addressing how you can add automated test scripts to your YAML file we created in the first part of this tutorial. 
+Note that every bitbucket pipeline we set up will have an associated YAML (.yml) file generated for us automatically. The YAML file is essentially how we interact
+with the pipeline configuration to tell bitbucket what processes it should run during a build execution. 
+
+If you're interested in learning more about how .yaml files actually work, I suggest reading this blog:
+https://blog.stackpath.com/yaml/
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Before we start covering how to add automated unit test files to your build configuration, i'm assuming that you've already read through some documentation on how
+to get a basic unit test set up to test your python scripts using Postman inside the unit-tests repository. If you already know how to generate a unit test file
+to test out your python scripts, continue with this tutorial.
+
+Again, I highly recommend looking at the code inside of the CItest branch in the demand-back-end repo. More specifically, look at the code inside the .yml file. 
+
+1. Head over to your branch in your local machine where your pipeline is setup. Create a new unit test python test file. 
+
+2. Make sure you check for syntax errors and basic functionality before pushing it to your remote branch.
+
+3. Next, we'll be editing the .yml file from our local machine inside the branch with the pipeline. 
+
+4. If you type out 'ls', you should see a 
+
+'bitbucket-pipelines.yml'
+
+file. Open this file up with an editor. 
+
+** Before we proceed, note that this .yml is VERY SENSITIVE to special characters and tabs inside the file. I highly suggest 
+not using tabs in this file. However, indentation DOES MATTER. Follow the example code in CItest branch if you get stuck. 
+
+5. We'll be adding code to the script block. Lets say that your test file you just created is called
+
+'team22_webservice_dispatch_test.py'
+
+and that the actual file we want to test (Make sure this file actually exists inside this repository) 
+
+'team22_webservice_supply_backend.py'
+
+We would set up our script block exactly as how i've set it up in the CItest demand-back-end repo. 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+script:  
+  - pip3 install -r requirements.txt
+  - python3 team22_webservice_supply_backend.py &
+  - python3 team22_webservice_dispatch_test.py
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+After the pipeline clones the repository into the docker container running our script, the script will then execute a command to start runnning the 
+backend python file that we're testing in the background using the (&) symbol. 
+
+If we were to skip the first line, then the container wouldn't be able to test the python unit test code we've written 
+properly because our team22_webservice_supply_backend code needs to be running as a background thread. 
+
+Then, the script will run the test file we've created to make sure that the code inside the file is functioning properly. 
+
+6. After checking syntax, push the commits to your remote branch. If the build was successful, you'll see output from your code based on the unit tests 
+you created on your local machine for your python back-end file insiode the .yml file. 
+
+
+-- Note how powerful this CI technique can be for us. We can continuously modify and add new test files to our repository as our requirements change. 
+
+
+7. Merge the changes from your remote branch into master with your teammates approval and review. 

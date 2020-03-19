@@ -1,0 +1,98 @@
+DevOps Starter Guides
+Written by Geoff Arroyo
+
+What Front-end Developers should know about Nginx
+
+Nginx is the web server we're using on both our supply and demand servers, and is one of the most popular web servers in the world. 
+Nginx processes client requests by dividing up configurations into server and location "blocks", which live in a hierarchial structure. Each time a client makes a request, 
+Nginx will decide which configuration block should be used to handle the request.  
+
+In this course, we'll mainly be using Nginx file management capabilities to serve up our static HTML pages. However, it's worth noting that Nginx offers much more than this 
+file management system. If you're interested in learning more about how Nginx web servers actually work, i'd suggest reading these documents:
+https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms
+https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/
+
+However, the main guide that I want you to focus on as a front-end developer is this one:
+https://docs.nginx.com/nginx/admin-guide/web-server/serving-static-content/
+
+This guide is a tutorial on how to setup Nginx to serve static content. You don't have to understand the ins and outs of the server and location blocks like your 
+DevOps team member should, but its a good idea to at least try and get a higher-level understanding of the techincal details of Nginx server blocks. 
+
+Let's say we're writing an HTML page where we simply want to print out to the page "hello world." For simplicity, we'll name this file,
+
+'index.html'
+
+Whenever the user enters either an HTTP or HTTPS request with our URL address on their browser, we want Nginx to display this index.html file.
+
+Now, the question you might want to ask is, how do we tell Nginx that we want this file to be on the home page? How does Nginx know that this file even exists? 
+
+Well, assuming that we've already figured out that we need to upload our file to a remote server with Nginx properly configuired and installed, along with a valid DNS router 
+attached to our domain name, we need to think about how a few things Nginx uses to index into our directories to serve static content. Let's take a look at a small Nginx server block example
+to learn more Nginx-specific vocabulary and concepts. 
+
+
+server {
+	listen 443[:443] ssl;
+	
+	server_name demand.team22.softwareengineeringii.com;
+	root /var/www/demand.team22.softwareengineeringii.com/html;
+
+	location / {
+		.....
+	}
+}
+
+
+What this code is essentially doing is setting up a server block by telling Nginx to respond to all HTTPS (443) requests from clients who type in the URL address
+
+'https://demand.team22.softwareengineeringii.com'
+
+to respond with something. We haven't quite defined the content we're going to respond with  yet, but for now, realize that the server_name variable defines the domain 
+we've registered with a DNS router.
+
+Also take note of the 'root' declaration underneath the server_name declaration. This root is the crux of this tutorial. You as a front-end developer should know that this root directory 
+is a directory on the remote server in which Nginx which search for specified files into. Nginx will not traverse up the directory path specified as root. Foe example, let's say that the 
+path of our index.html was,
+
+/var/index.html
+
+This would be bad, because we've defined our root as the directory /var/www/demand.team22.softwareengineeringii.com/html. Thus, Nginx will start searching for files to serve inside of the html folder
+and not go up to parent directories to search for the index.html file. If we tried to serve the index.html file, we would see a 
+
+'404 Not Found Error'
+
+Displayed on the browser. This means that ,
+
+User typed in our URL 'https://demand.team22.softwareengineeringii.com' ---> Nginx is listening for HTTPS requests and responds to request ---> Nginx searches for the index.html file inside of the 
+directory /var/www/demand.team22.softwareengineeringii.com specified in the server block ---> Nginx didn't find index.html inside the folder html and all subfolders off of html ---> 404 displayed on browser
+
+In general, we would like to avoid this mistake by setting all of our static front-end files insdie of the root directory so that Nginx will indeed find the file. 
+
+Now, let's finish the server block details so you can see a correct implementation of how we should serve a static index.html file on our homepage. 
+
+
+server {
+	listen 443[:443] ssl;
+	
+	server_name demand.team22.softwareengineeringii.com;
+	root /var/www/demand.team22.softwareengineeringii.com/html;
+
+	location / {
+		index index.html index.htm;
+	}
+}
+
+
+With this code, we've added an 'index' declaration inside of our location block.
+
+The slash next to the location block means that when the user enters our root server_name,
+
+https://demand.team22.softwareengineeringii.com 
+
+on their browser, this location block will scan our local directory tree for a file named index.html. If index.html is not found in the tree of files 
+specificied off of the root directory /var/www/demand.team22.softwareengineeringii.com/html, then Nginx will try looking for a file called index.htm. 
+
+Thus, remember that to serve static content on our server, we need to careful with where we place our files. Especially with specifying a root directory tree
+for Nginx to search, all of our front-end files need to be placed inside of the root directory so Nginx can actually find our associated file name specified
+with the index declaration. 
+
