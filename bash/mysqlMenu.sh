@@ -1,9 +1,9 @@
 #! /bin/bash
 echo "Welcome to the team22 mysql program."
 # Print user menu
-echo -e "1. Update column in existing table\n2. Add new column in existing table\n3. Delete column in existing table\n4. View contents of table column (Select *)\n5. Rename a column in a table\n6. Query a table using SELECT params\n"
+echo -e "1. Update column in existing table\n2. Add new column in existing table\n3. Delete column in existing table\n4. View contents of table column (Select *)\n5. Rename a column in a table\n6. Query a table using SELECT params\n7. Describe a table\n8. Delete rows from a table using WHERE\n"
 #Constants
-dbName="team22supply"
+dbName="team22demand"
 
 # Subroutines
 updateColumn () {
@@ -54,19 +54,33 @@ queryTableUsingSelect() {
 	return
 }
 
-getDescFromTable () {
+describeTable() {
+	read -p "Enter the table you want to describe here: " tableName
+	getDescFromTable $tableName
+	return
+}
+
+getDescFromTable() {
 	table=$1
 	mysql -e "use $dbName; describe $table"
 	return
 }
 
+deleteRowFromTable() {
+	read -p "Enter the table you want to delete from: " tableName
+	read -p "Enter your delete condition (WHERE clause): " query
+	echo "use $dbName; delete from $tableName where $query"
+	mysql -e "use $dbName; delete from $tableName where $query"
+	return
+}
+
 # Initialize loop invariant
-end=6
+end=8
 start=1
 userSelection=$start
 while (( userSelection >= start )) && (( userSelection <= end))
 do
-	read -p 'Enter an number between 1 and 6: ' userSelection
+	read -p 'Enter an number between 1 and 7: ' userSelection
 	echo "Your number was equal to $userSelection"
 	if (( userSelection == 1 )); then
 		updateColumn
@@ -85,6 +99,12 @@ do
 
 	elif (( userSelection == 6 )); then
 		queryTableUsingSelect
+
+	elif (( userSelection == 7 )); then
+		describeTable
+
+	elif (( userSelection == 8 )); then
+		deleteRowFromTable
 
 	else
 		echo "Goodbye!"
