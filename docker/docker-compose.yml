@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  db:
+    container_name: team22-database
+    image: mysql
+    command: --wait_timeout=28800
+    restart: on-failure
+    ports:
+      - "6022:3306"
+    volumes: 
+      - team22-db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+
+volumes:
+  team22-db:
