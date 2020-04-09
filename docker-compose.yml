@@ -1,0 +1,12 @@
+version: '3'
+services:
+  reverse:
+    container_name: docker-nginx-reverse
+    hostname: reverse
+    image: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /etc/nginx
+      - /etc/letsencrypt/live/demand.team22.softwareengineeringii.com
