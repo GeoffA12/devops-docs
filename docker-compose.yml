@@ -1,12 +1,21 @@
-version: '3'
+version: "3"
+
 services:
-  reverse:
-    container_name: docker-nginx-reverse
-    hostname: reverse
-    image: nginx
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - /etc/nginx
-      - /etc/letsencrypt/live/demand.team22.softwareengineeringii.com
+    app:
+        build:
+            context: ./demand-back-end
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./demand-back-end/app:/app
+    
+    web:
+        build:
+            context: ./devops-docs
+        restart: on-failure
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - /etc/letsencrypt/live/demand.team22.softwareengineeringii.com:/etc/letsencrypt/live/demand.team22.softwareengineeringii.com
+            - /var/www/demand.team22.softwareengineeringii.com/html:/var/www/demand.team22.softwareengineeringii.com/html
