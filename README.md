@@ -68,7 +68,7 @@ sudo apt autoremove --yes
 
 ## Python Virtual Environment Configuration 
 
-* [MongoDB Docs](python/python.md)
+* [Python Docs](python/python.md)
 
 ## Nginx Server Configuration
 
