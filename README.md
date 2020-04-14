@@ -66,7 +66,7 @@ sudo apt autoremove --yes
 
 `NodeJS` and `npm` installation and configuration can be found in the [NodeJS Documentation](https://github.com/nodesource/distributions/blob/master/README.md). 
 
-## Python Virtual Environment Setup
+## Python Virtual Environment Configuration 
 
 * [MongoDB Docs](python/python.md)
 
@@ -85,6 +85,4 @@ sudo apt autoremove --yes
 ## Nodejs PM2 Setup
 
 * [PM2 Docs](pm2/pm2.md)
-
-## Notes
 

@@ -1,5 +1,5 @@
 # Nginx Configuration
-[Back to Server Config](readme.md)
+[Back to Server Config](/README.md)
 
 Nginx is a relatively lightweight and powerful webserver for Linux that we will be using in order to redirect requests coming in to our server and to serve static resources (such as HTML pages) back to a client. Nginx has some powerful tools at its disposal, one of the most important (for this guide and project) being the `proxy-pass` functionality. As you know from Software Engineering 1, we had to write request handlers and APIs that listened on specific ports in the system for requests, and would respond to those requests. However, those request handlers were listening on `localhost` only, meaning they wouldn't be accessible from outside of the server. For problems like this, Nginx acts as a "reverse proxy", listening for normal HTTP/HTTPS requests on ports 80 and 443 (respectively), and then can either reroute the traffic to another webserver (either within the system, that would be listening on a `localhost:[port]`, or to a seperate physical server entirely), serve static web files, invoke PHP or other server-side languages, and a myriad of other functionality not mentioned here. 
 
@@ -58,4 +58,4 @@ sudo systemctl restart nginx
 
 From here you can load your site!
 
-[Back to main docs](readme.md)
+[Back to main docs](../README.md)
