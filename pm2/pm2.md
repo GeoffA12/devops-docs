@@ -48,7 +48,7 @@ We'll need an additional isntall through npm for some of our pm2 packages to fun
 You now have all the necessary packages to host your python applications with PM2. 
 
 
-## PM2 Installation and Configuration
+## Step 2: PM2 Installation and Configuration
 
 Next let’s install PM2. PM2 makes it possible to daemonize applications so that they will run in the background as a service.
 
@@ -87,7 +87,7 @@ The warning issued at the bottom of the output is telling us to sync the current
 
 Now we're ready to learn a few commands we'll be needing throughout the course to work with PM2. 
 
-## Step 3 Learn useful PM2 commands
+## Step 3: Learn useful PM2 commands
 
 PM2 provides many subcommands that allow you to manage or look up information about your applications.
 
