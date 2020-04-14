@@ -1,6 +1,7 @@
 ## PM2 Server Configuration
+[Back to main docs](/README.md)
 
-PM2 is a daemon process manager that will help you manage and keep your applications online 24/7. 
+[PM2](https://pm2.keymetrics.io/docs/usage/log-management/) is a daemon process manager that will help you manage and keep your applications online 24/7. 
 
 PM2 was developed to manage Node.js applications, but we can take advantage of PM2's flexibility in our PoC to persist our python back-end web services. 
 
@@ -13,7 +14,7 @@ For context on Node.js, Node.js is an open-source JavaScript runtime environment
 You should already have the following setup:
 
 * An [Ubuntu v18.04 droplet](/README.md) configured.
-* [Python](python/python.md) Installed and upgraded on your server. 
+* [Python](/python/python.md) Installed and upgraded on your server. 
 * A python back-end service that you want to persist on your server. For this tutorial, i'll be using `team22cswebservice.py` as our placefiller. 
 
 ## Step 1: Install Nodejs v12
@@ -109,6 +110,6 @@ If you see a `status: errored` value in after issuing your `pm2 start` command, 
 
 To debug, I suggest checking the `pm2 logs --json` file or running your script manually on the server to see if any errors are raising.
 
-
+[Back to main docs](/README.md)
 
 

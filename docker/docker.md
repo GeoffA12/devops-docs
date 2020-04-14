@@ -1,4 +1,5 @@
 # Docker Configuration
+[Back to main docs](/README.md)
 
 Docker is an application that simplifies the process of managing application processes in containers. Containers let you run your applications in resource-isolated processes. They’re similar to virtual machines, but containers are more portable, more resource-friendly, and more dependent on the host operating system.
 
@@ -10,7 +11,7 @@ In this tutorial, you’ll install and use Docker Community Edition (CE) on Ubun
 
 To follow this guide, you'll need the following: 
 
- * One Ubuntu 18.04 server set up by following the [Ubuntu 18.04 initial server setup guide](../README.md), including a sudo non-root user.
+ * One Ubuntu 18.04 server set up by following the [Ubuntu 18.04 initial server setup guide](/README.md), including a sudo non-root user.
 
 Eventually, you'll be needing to work with docker images and push them to the docker hub, or pull images off of the docker hub. Therefore, it is highly recommended to [make an account on the Docker Hub](https://hub.docker.com/) prior to starting the guide.
 
@@ -144,3 +145,5 @@ To view system-wide information about Docker use,
 Docker containers are built from Docker images. By default, Docker pulls these images from [Docker Hub](https://hub.docker.com/), a Docker registry managed by Docker, the company behind the Docker project. Anyone can host their Docker images on Docker Hub, so most applications and Linux distributions you’ll need will have images hosted there.
 
 To learn more about working with docker images and containers, check out [the official Docker documentation website](https://docs.docker.com/)
+
+[Back to main docs](/README.md)

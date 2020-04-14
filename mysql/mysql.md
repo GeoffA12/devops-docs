@@ -1,4 +1,5 @@
 # MySQL and Docker-Compose Integration
+[Back to main docs](/README.md)
 
 With Docker Compose, we get all the benefits of Docker plus more. Docker works by creating a virtual environment(or container) for your code to run. What Docker Compose adds is orchestration and organization of multiple containers. While this tutorial will only spin up a single container for our MySQL instance, Docker Compose can also be used to run all of your various services at once when your project begins to grow out.
 
@@ -36,4 +37,6 @@ Next, run the docker container as a background thread:
 
 This command might take a while on the first run because Docker needs to pull the MySQL containers from a Docker repository online. 
 
-After the command is executed, we now have access to mysql on our system. 
+After the command is executed, we now have access to mysql on our system.
+
+[Back to main docs](/README.md)

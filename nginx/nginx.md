@@ -58,4 +58,4 @@ sudo systemctl restart nginx
 
 From here you can load your site!
 
-[Back to main docs](../README.md)
+[Back to main docs](/README.md)

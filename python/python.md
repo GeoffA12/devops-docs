@@ -1,4 +1,5 @@
 # Python Virtual Environment Configuration
+[Back to main docs](/README.md)
 
 [Python](https://www.python.org/) is a flexible and versatile programming language, with strengths in scripting, automation, data analysis, machine learning, and back-end development.
 
@@ -50,7 +51,7 @@ Note that within the Python 3 virtual environment, you can use the command pytho
 Type in the command `python` and you'll know the virtual environment was set-up properly if you see the following output:
 
 ```
-Python 3.6.5 (default, Apr  1 2018, 05:46:30) 
+Python 3.6.9 (default, Apr  1 2018, 05:46:30) 
 [GCC 7.3.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> 
@@ -60,7 +61,7 @@ To deactivate the virtual environment, type in
 
 `deactivate`
 
-
+[Back to main docs](/README.md)
 
 
 
