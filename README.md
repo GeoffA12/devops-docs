@@ -76,7 +76,7 @@ sudo apt autoremove --yes
 
 ## Docker Setup
 
-* [MySQL Docs](docker/docker.md)
+* [Docker Docs](docker/docker.md)
 
 ## MySQL Setup with Docker-Compose
 
