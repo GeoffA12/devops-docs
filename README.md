@@ -1,6 +1,6 @@
 # Server Configuration Guide
 
-This guide is written for setting up droplets on Digital Ocean for Software Engineering 1 at St. Edward's University for Spring 2020. While there is a lot of information here, it is very important that you complete EVERY step in order to get a stable, and fully functional environment. Make sure to continue on to the MongoDB, NodeJS and Nginx pages as they have additional setup information.
+While there is a lot of information here, it is very important that you complete EVERY step in order to get a stable, and fully functional environment. Make sure to continue on to the MongoDB, NodeJS and Nginx pages as they have additional setup information.
 
 ## Software Versions:
  
